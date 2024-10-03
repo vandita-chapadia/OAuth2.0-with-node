@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google OAuth2</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+        .google-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            color: #555;
+            border: 1px solid #ddd;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .google-btn:hover {
+            background-color: #f7f7f7;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .google-btn img {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+        div {
+            text-align: center;
+            background-color: white;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>Google OAuth2 with Passport.js</h2>
+        <a href="/auth/google" class="google-btn">
+            <img src="data:image/png;base64,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" alt="Google Logo">
+            Login with Google
+        </a>
+    </div>
+</body>
+</html>
