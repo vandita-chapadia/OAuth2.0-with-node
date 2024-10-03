@@ -31,7 +31,7 @@ app.use(passport.session());
 
 app.get(
   "/auth/google",
-  passport.authenticate("google", { scope: ["email", "profile"] })
+  passport.authenticate("google", { scope: ["email", "profile"],  prompt: 'consent' })
 );
 
 app.get(
